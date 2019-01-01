@@ -5,7 +5,7 @@ It has functions that can:
 <br/>
 Fetch all phone messages
 <br/>
-FileWorker.getAllSentSms(null)`
+`FileWorker.getAllSentSms(null)`
 <br/>
 `FileWorker.dumpAllSms(null)`
 <br/>
