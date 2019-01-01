@@ -33,4 +33,4 @@ You can clone this repository and make your own modifications to suite your need
 
 ## NOTE
 <br/>
-This repo will not be maintained and will not bne accepting PRs
+This repo will not be maintained and will not be accepting PRs
