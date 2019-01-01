@@ -8,6 +8,7 @@ import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import com.hashcode.messagedump.utils.PdfCreator
 import com.hashcode.messagedump.utils.SmsFilter
 import com.hashcode.messagedump.utils.SmsLogger
 import kotlinx.android.synthetic.main.activity_main.*
@@ -30,10 +31,14 @@ class MainActivity : AppCompatActivity() {
                 val allSms = SmsLogger.getMessages(query, null, null)
 
                 val fileName = "messageDump"
-                writeToFile(fileName, allSms.toString())
+//                writeToFile(fileName, allSms.toString())
 
                 val sortedName = "sortedMessages"
-                writeToFile(sortedName, SmsFilter.filterArray(allSms!!).toString())
+//                writeToFile(sortedName, SmsFilter.filterArray(allSms!!).toString())
+
+                PdfCreator.createPdf(SmsFilter.filterArray(allSms!!))
+                showMessage("Successfully saved file as pdf")
+
             }
         }
 
@@ -48,7 +53,7 @@ class MainActivity : AppCompatActivity() {
         showMessage("Successfully saved file to ${file.absolutePath!!}")
     }
 
-    private fun fileDir(): File {
+    fun fileDir(): File {
         val dir = Environment.getExternalStoragePublicDirectory("MessageDump/exports")
         if (!dir.exists()) {
             val folderCreated = dir.mkdirs()

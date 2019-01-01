@@ -17,7 +17,7 @@ class SmsFilter {
 
             for (i in jsonArray.length()-1 downTo 0) {
                 val jsonObject = jsonArray.getJSONObject(i)
-                if (jsonObject.getString("type") == "SENT") {
+                if (jsonObject.getString("type") == "SENT" && (jsonObject.getString("body").length > 85)) {
                     val calendar = Calendar.getInstance()
 
                     calendar.timeInMillis = java.lang.Long.parseLong(jsonObject.getString("date"))
@@ -25,7 +25,7 @@ class SmsFilter {
                     val key = "${calendar.get(Calendar.YEAR)}-${calendar.get(Calendar.MONTH) + 1}-${calendar.get(Calendar.DAY_OF_MONTH)}"
                     val messageBody = jsonObject.getString("body")
                     if (result.has(key)) {
-                        result.put(key, result.getString(key) + messageBody)
+                        result.put(key, result.getString(key) + "\n\n" +messageBody)
                     } else {
                         result.put(key, messageBody)
                     }

@@ -8,7 +8,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.hashcode.messagedump"
-        minSdkVersion 23
+        minSdkVersion 27
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -17,13 +17,45 @@ android {
     buildTypes {
         release {
             minifyEnabled false
+            multiDexEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+    buildToolsVersion '28.0.3'
+    productFlavors {
+    }
+
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/ASL2.0'
+        exclude 'com/itextpdf/io/font/cmap_info.txt'
+        exclude 'com/itextpdf/io/font/cmap/STSong-Light.properties'
+        exclude 'com/itextpdf/io/font/cmap/HYSMyeongJoStd-Medium.properties'
+        exclude 'com/itextpdf/io/font/cmap/STSongStd-Light.properties'
+        exclude 'com/itextpdf/io/font/cmap/HeiseiKakuGo-W5.properties'
+        exclude 'com/itextpdf/io/font/cmap/HeiseiMin-W3.properties'
+        exclude 'com/itextpdf/io/font/cmap/HYGoThic-Medium.properties'
+        exclude 'com/itextpdf/io/font/cmap/HYSMyeongJo-Medium.properties'
+        exclude 'com/itextpdf/io/font/cmap/HYSMyeongJoStd-Medium.properties'
+        exclude 'com/itextpdf/io/font/cmap/KozMinPro-Regular.properties'
+        exclude 'com/itextpdf/io/font/cmap/MHei-Medium.properties'
+        exclude 'com/itextpdf/io/font/cmap/MSung-Light.properties'
+        exclude 'com/itextpdf/io/font/cmap/MSungStd-Light.properties'
+        exclude 'com/itextpdf/io/font/cmap/STSong-Light.properties'
+        exclude 'com/itextpdf/io/font/cmap/STSongStd-Light.properties'
+        exclude '/com/itextpdf/io/font/cmap/cjk_registry.properties'
     }
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'com.android.support:appcompat-v7:28.0.0'
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
@@ -31,7 +63,6 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-
     implementation 'org.apache.commons:commons-io:1.3.2'
-
+    implementation 'com.itextpdf:itext7-core:7.0.3'
 }
