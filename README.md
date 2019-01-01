@@ -1,6 +1,17 @@
 # message-dump
-An app that I use to get all messages I've sent to a particular phone number
+An android app that can be used to:
+<br/>
+get all messages sent or received from a particular phone number.
+<br/>
+Generate a PDF document from the messages
+<br/>
+Save messages in json to phone storage
+<br/>
+
+Initialize the Worker class first
+<br/>
 `FileWorker.init(context: Context)`
+<br/>
 It has functions that can:
 <br/>
 Fetch all phone messages
@@ -19,7 +30,7 @@ Fetch or save messages sent to numbers that match a regex pattern
 
 Filter messages and get all messages sorted in a list.
 <br/>
-`FileWorker.dumpFilteredSms(number: String`
+`FileWorker.dumpFilteredSms(number: String)`
 <br/>
 
 Generate a PDF document of all the messages
