@@ -22,7 +22,7 @@ Filter messages and get all messages sorted in a list.
 `FileWorker.dumpFilteredSms(number: String`
 <br/>
 
-Generate a pdf of all the messages
+Generate a PDF document of all the messages
 <br/>
 `FileWorker.generateSmsPdf(number: String)`
 <br/>

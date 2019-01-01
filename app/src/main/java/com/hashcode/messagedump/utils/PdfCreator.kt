@@ -56,6 +56,7 @@ class PdfCreator {
                 else{
                     contentParagraph.setTextAlignment(TextAlignment.JUSTIFIED)
                 }
+
                 contentParagraph.setVerticalAlignment(VerticalAlignment.MIDDLE)
                 contentParagraph.setHorizontalAlignment(HorizontalAlignment.CENTER)
 

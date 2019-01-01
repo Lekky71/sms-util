@@ -5,6 +5,7 @@ import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import com.hashcode.messagedump.R
 import com.hashcode.messagedump.utils.FileWorker
 import com.hashcode.messagedump.utils.SmsLogger
@@ -23,6 +24,7 @@ class MainActivity : AppCompatActivity() {
             if (isFormValid(11)) {
                 val number = numberEditText.text.toString().trim()
                 val worked: Boolean = FileWorker.generateSmsPdf(number)
+
                 if (worked) {
                     showMessage("Successfully generated the pdf, check ${FileWorker.fileDir().absolutePath}")
                 }
