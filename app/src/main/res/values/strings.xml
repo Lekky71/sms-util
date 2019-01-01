@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">MessageDump</string>
     <string name="action_settings">Settings</string>
+
+    <string name="first_page_text">You are the light of my world\n\n\n\n\n See what I sent in 2018</string>
+    <string name="last_page_text">Thank you for 2018</string>
 </resources>

@@ -10,16 +10,22 @@ import android.provider.Telephony
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import android.util.Log
-import com.hashcode.messagedump.PermissionActivity
+import com.hashcode.messagedump.permission.PermissionActivity
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
+
+/**
+ * Helper class to fetch all SMS sent or received from a specified number.
+ */
 
 class SmsLogger {
 
     companion object {
         internal fun init(con: Context) {
             context = con
+
+            //Request SMS and External Storage permissions.
             askForPermissions()
         }
 
@@ -28,6 +34,9 @@ class SmsLogger {
         private var ACTION_REQUEST_PERMISSION = "ACTION_REQUEST_PERMISSION"
 
 
+        /**
+         * This function checks for permission status and does the necessary
+         */
         private fun askForPermissions() {
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
 
@@ -45,6 +54,7 @@ class SmsLogger {
                 ) == PackageManager.PERMISSION_GRANTED
 
                 if (!(permissionCheck1 && permissionCheck2 && permissionCheck3)){
+                    //If any of the permission is not given, it lunches and intent to PermissionActivity
                     val intent = Intent(context, PermissionActivity::class.java)
                     intent.action = ACTION_REQUEST_PERMISSION
                     context.startActivity(intent)
@@ -55,12 +65,19 @@ class SmsLogger {
 
         }
 
+        /**
+         * This function extracts the messages
+         * @param address is the part of the number we are considering (a number search query string)
+         * @param address can also be null, if null, the function fetches all the SMS on the phone
+         *
+         * @param lim is used to limit the number of SMS fetched. [It should be a number in string]
+         * @param time is used to specify the minimum date for a message to be fetched. [It should be time in milliseconds in string]
+         *
+         * @return a JSONArray containing all the messages.
+         */
+
         fun getMessages(address: String?, lim: String?, time: String?): JSONArray? {
-            if (ActivityCompat.checkSelfPermission(
-                    context,
-                    Manifest.permission.READ_SMS
-                ) != PackageManager.PERMISSION_GRANTED
-            ) {
+            if (ActivityCompat.checkSelfPermission(context, Manifest.permission.READ_SMS) != PackageManager.PERMISSION_GRANTED){
                 return null
             }
 

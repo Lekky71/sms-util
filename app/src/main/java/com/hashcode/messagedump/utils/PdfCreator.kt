@@ -1,6 +1,6 @@
 package com.hashcode.messagedump.utils
 
-import com.hashcode.messagedump.MainActivity
+import com.hashcode.messagedump.main.MainActivity
 import com.itextpdf.io.font.FontConstants
 import com.itextpdf.kernel.font.PdfFontFactory
 import com.itextpdf.kernel.geom.PageSize
@@ -21,9 +21,15 @@ import java.util.*
 class PdfCreator {
     companion object {
 
+        /**
+         * @param messages is a JSONObject of texts, each key-value is the date of the message - and the
+         * messages for that day stored in one string.
+         * @param firstPageMessage is an optional parameter for text that would be on the first page of the pdf
+         * @param lastPageMessage is an optional parameter for text that would be on the last page of the pdf
+         */
 
         fun createPdf(messages: JSONObject, firstPageMessage: String?, lastPageMessage:String?) {
-            val outputFile = File(MainActivity().fileDir(), "pdfMessages" + "_" + System.currentTimeMillis() + ".pdf")
+            val outputFile = File(FileWorker.fileDir(), "pdfMessages" + "_" + System.currentTimeMillis() + ".pdf")
 
             val pdf = PdfDocument(PdfWriter(outputFile.absolutePath, WriterProperties().addXmpMetadata()))
             val pagesize = PageSize.A4
@@ -35,6 +41,10 @@ class PdfCreator {
             val info = pdf.documentInfo
             info.title = "Messages Pdf"
 
+            /**
+             * @param titleText is the header text of the page (the date of messages).
+             * @param bodyText is a string of the messages for that day.
+             */
 
             fun addNewPage(titleText: String?, bodyText: String?) {
                 val bold = PdfFontFactory.createFont(FontConstants.TIMES_BOLD)
@@ -80,7 +90,6 @@ class PdfCreator {
             }
 
             document.close()
-
 
         }
 

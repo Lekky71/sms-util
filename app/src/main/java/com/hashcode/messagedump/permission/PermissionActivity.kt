@@ -1,4 +1,4 @@
-package com.hashcode.messagedump
+package com.hashcode.messagedump.permission
 
 import android.Manifest
 import android.content.Context
@@ -8,8 +8,11 @@ import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import com.hashcode.messagedump.R
 
-
+/**
+ * Helper Activity to request runtime permissions from user
+ */
 class PermissionActivity : AppCompatActivity() {
 
     private lateinit var context: Context
