@@ -43,6 +43,7 @@ class PdfCreator {
             /**
              * @param titleText is the header text of the page (the date of messages).
              * @param bodyText is a string of the messages for that day.
+             * @param isCentered is to align the text to the center.
              */
 
             fun addNewPage(titleText: String?, bodyText: String?, isCentered: Boolean) {
@@ -50,7 +51,7 @@ class PdfCreator {
 
                 val contentParagraph = Paragraph()
                 if(isCentered){
-                    contentParagraph.setTextAlignment(TextAlignment.CENTER)
+                    contentParagraph.setTextAlignment(TextAlignment.CENTER).setFontSize(30.0F)
                 }
                 else{
                     contentParagraph.setTextAlignment(TextAlignment.JUSTIFIED)
@@ -69,7 +70,6 @@ class PdfCreator {
 
                 document.add(contentParagraph)
                 document.add(AreaBreak())
-
             }
 
             //Add first page
@@ -85,14 +85,12 @@ class PdfCreator {
                 val dateString = SimpleDateFormat("E, dd MMMM yyyy", Locale.getDefault()).format(date1) + "\n\n\n\n\n"
 
                 addNewPage(dateString, messages.getString(key), false)
-
             }
 
             //Put a closing page
             if (lastPageMessage != null) {
                 addNewPage(lastPageMessage, null, true)
             }
-
             document.close()
 
         }
