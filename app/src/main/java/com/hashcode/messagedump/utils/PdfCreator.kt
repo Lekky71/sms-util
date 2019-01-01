@@ -51,7 +51,7 @@ class PdfCreator {
 
                 val contentParagraph = Paragraph()
                 if(isCentered){
-                    contentParagraph.setTextAlignment(TextAlignment.CENTER).setFontSize(30.0F)
+                    contentParagraph.setTextAlignment(TextAlignment.CENTER).setFontSize(25.0F)
                 }
                 else{
                     contentParagraph.setTextAlignment(TextAlignment.JUSTIFIED)
