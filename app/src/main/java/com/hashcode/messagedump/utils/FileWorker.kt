@@ -16,8 +16,12 @@ class FileWorker {
     companion object {
         @SuppressLint("StaticFieldLeak")
         var context: Context? = null
-        fun init(context: Context){
-            this.context = context;
+
+        /**
+         * @param context is passed into the class for operations.
+         */
+        fun init(context: Context) {
+            this.context = context
         }
 
         /**
@@ -26,7 +30,7 @@ class FileWorker {
          * into file named
          * @param fileName
          */
-        private fun writeToFile(fileName: String, content:String): String{
+        private fun writeToFile(fileName: String, content: String): String {
             val file = File(fileDir(), fileName + "_" + System.currentTimeMillis() + ".json")
             FileUtils.writeStringToFile(file, content)
             val intent = Intent("android.intent.action.MEDIA_SCANNER_SCAN_FILE")
@@ -34,7 +38,6 @@ class FileWorker {
             context!!.sendBroadcast(intent)
             return file.absolutePath!!
         }
-
 
 
         /**
@@ -54,14 +57,14 @@ class FileWorker {
          * @param number
          *      * @return a JSONArray containing raw strings
          */
-        fun getAllSentSms(number: String): JSONArray?{
+        fun getAllSentSms(number: String): JSONArray? {
             return SmsLogger.getMessages(number.substring(7, 10), null, null)
         }
 
         /**
          * Saves all the raw messages in one file
          */
-        fun dumpAllSms(number: String): String{
+        fun dumpAllSms(number: String): String {
             val fileName = "messageDump"
             return writeToFile(fileName, getAllSentSms(number)!!.toString())
         }
@@ -69,7 +72,7 @@ class FileWorker {
         /**
          * Saves all the raw messages in one file
          */
-        fun dumpFilteredSms(number: String): String{
+        fun dumpFilteredSms(number: String): String {
             val sortedName = "sortedMessages"
             return writeToFile(sortedName, SmsFilter.filterArray(getAllSentSms(number)!!, 85).toString())
         }
@@ -78,15 +81,16 @@ class FileWorker {
          * Generates a pdf file containing all sent messages with character length > 85
          * You can change the constraint as seen below.
          */
-        fun generateSmsPdf(number: String): Boolean{
+        fun generateSmsPdf(number: String): Boolean {
             return try {
                 PdfCreator.createPdf(
                     SmsFilter.filterArray(getAllSentSms(number)!!, 85),
                     context!!.resources.getString(R.string.first_page_text),
-                    context!!.resources.getString(R.string.last_page_text))
+                    context!!.resources.getString(R.string.last_page_text)
+                )
                 true
-            } catch (e: Exception){
-                Toast.makeText(context, "An error occured", Toast.LENGTH_LONG).show()
+            } catch (e: Exception) {
+                Toast.makeText(context, "An error occurred", Toast.LENGTH_LONG).show()
                 e.printStackTrace()
                 false
             }

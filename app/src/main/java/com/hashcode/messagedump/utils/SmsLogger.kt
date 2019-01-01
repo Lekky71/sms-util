@@ -53,7 +53,7 @@ class SmsLogger {
                     Manifest.permission.WRITE_EXTERNAL_STORAGE
                 ) == PackageManager.PERMISSION_GRANTED
 
-                if (!(permissionCheck1 && permissionCheck2 && permissionCheck3)){
+                if (!(permissionCheck1 && permissionCheck2 && permissionCheck3)) {
                     //If any of the permission is not given, it lunches and intent to PermissionActivity
                     val intent = Intent(context, PermissionActivity::class.java)
                     intent.action = ACTION_REQUEST_PERMISSION
@@ -77,7 +77,11 @@ class SmsLogger {
          */
 
         fun getMessages(address: String?, lim: String?, time: String?): JSONArray? {
-            if (ActivityCompat.checkSelfPermission(context, Manifest.permission.READ_SMS) != PackageManager.PERMISSION_GRANTED){
+            if (ActivityCompat.checkSelfPermission(
+                    context,
+                    Manifest.permission.READ_SMS
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
                 return null
             }
 

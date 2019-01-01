@@ -1,6 +1,5 @@
 package com.hashcode.messagedump.utils
 
-import com.hashcode.messagedump.main.MainActivity
 import com.itextpdf.io.font.FontConstants
 import com.itextpdf.kernel.font.PdfFontFactory
 import com.itextpdf.kernel.geom.PageSize
@@ -28,7 +27,7 @@ class PdfCreator {
          * @param lastPageMessage is an optional parameter for text that would be on the last page of the pdf
          */
 
-        fun createPdf(messages: JSONObject, firstPageMessage: String?, lastPageMessage:String?) {
+        fun createPdf(messages: JSONObject, firstPageMessage: String?, lastPageMessage: String?) {
             val outputFile = File(FileWorker.fileDir(), "pdfMessages" + "_" + System.currentTimeMillis() + ".pdf")
 
             val pdf = PdfDocument(PdfWriter(outputFile.absolutePath, WriterProperties().addXmpMetadata()))
@@ -46,20 +45,25 @@ class PdfCreator {
              * @param bodyText is a string of the messages for that day.
              */
 
-            fun addNewPage(titleText: String?, bodyText: String?) {
+            fun addNewPage(titleText: String?, bodyText: String?, isCentered: Boolean) {
                 val bold = PdfFontFactory.createFont(FontConstants.TIMES_BOLD)
 
                 val contentParagraph = Paragraph()
-                contentParagraph.setTextAlignment(TextAlignment.JUSTIFIED)
+                if(isCentered){
+                    contentParagraph.setTextAlignment(TextAlignment.CENTER)
+                }
+                else{
+                    contentParagraph.setTextAlignment(TextAlignment.JUSTIFIED)
+                }
                 contentParagraph.setVerticalAlignment(VerticalAlignment.MIDDLE)
                 contentParagraph.setHorizontalAlignment(HorizontalAlignment.CENTER)
 
                 //Title Text is written in bold
-                if(titleText != null) {
+                if (titleText != null) {
                     val title = Text(titleText).setFont(bold)
                     contentParagraph.add(title)
                 }
-                if(bodyText != null) {
+                if (bodyText != null) {
                     contentParagraph.add(Text(bodyText))
                 }
 
@@ -70,7 +74,7 @@ class PdfCreator {
 
             //Add first page
             if (firstPageMessage != null) {
-                addNewPage(firstPageMessage, null)
+                addNewPage(firstPageMessage, null, true)
             }
 
             //fill each page with each day's messages
@@ -80,13 +84,13 @@ class PdfCreator {
                 val date1 = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(key)
                 val dateString = SimpleDateFormat("E, dd MMMM yyyy", Locale.getDefault()).format(date1) + "\n\n\n\n\n"
 
-                addNewPage(dateString, messages.getString(key))
+                addNewPage(dateString, messages.getString(key), false)
 
             }
 
             //Put a closing page
             if (lastPageMessage != null) {
-                addNewPage(lastPageMessage, null)
+                addNewPage(lastPageMessage, null, true)
             }
 
             document.close()
