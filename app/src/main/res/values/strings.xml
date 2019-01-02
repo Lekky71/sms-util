@@ -2,8 +2,8 @@
     <string name="app_name">MessageDump</string>
     <string name="action_settings">Settings</string>
 
-    <string name="first_page_text">\n\n\n\n\n\n\n\nYou are the light of my world\n\n\n\n\n Our 2018</string>
-    <string name="last_page_text">\n\n\n\n\n\n\n\n\n\nThank you for 2018</string>
+    <string name="first_page_text">\n\n\n\n\n\n\n\Pdf Title\n\n\n\n\nAuthor Name</string>
+    <string name="last_page_text">\n\n\n\n\n\n\n\n\n\nThe End</string>
     <string name="working_message">Working...</string>
     <string name="generate_message">Generate</string>
 </resources>
